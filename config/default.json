@@ -1,0 +1,6 @@
+{
+    "DevServer": {
+        "port": "5000",
+        "originAllowed" : "*"
+    }
+}
