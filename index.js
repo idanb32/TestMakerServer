@@ -23,6 +23,8 @@ app.use('/quiz',quizRouter);
 app.use('/solvedQuestion',solvedQuestionRouter);
 
 
+console.log("CHANGE HAS BEEN MADE")
+
 app.listen(PORT, ()=>{
     console.log(`server is running on PORT : ${PORT}`);
 });
