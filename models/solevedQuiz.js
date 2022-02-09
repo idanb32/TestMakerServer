@@ -57,5 +57,5 @@ const solevedQuizScheme = new Schema({
 
 })
 
-const quiz =  mongoose.model('quiz',quizScheme)
-model.exports = quiz;
+const solevedQuiz =  mongoose.model('SolevedQuiz',quizScheme)
+model.exports = solevedQuiz;
