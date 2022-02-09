@@ -2,5 +2,8 @@
     "DevServer": {
         "port": "5000",
         "originAllowed" : "*"
+    },
+       "db":{
+    "url":"mongodb+srv://user:pass@cluster0.p5kaq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
     }
 }
