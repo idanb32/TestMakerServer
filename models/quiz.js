@@ -23,15 +23,15 @@ const quizScheme = new Schema({
         unique: false
     },
     msgOnPass:{
-        type: Msg,
-        required: [true, 'language is requierd'],
-        unique: true
+        type: String,
+        required: [true, 'pass messege is requierd'],
+        unique: false
 
     },
     msgOnFail:{
-        type: Object,
-        required: [true, 'language is requierd'],
-        unique: true
+        type: String,
+        required: [true, 'fail messege is requierd'],
+        unique: false
 
     },
     questions: [{

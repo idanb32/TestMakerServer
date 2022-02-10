@@ -9,8 +9,7 @@ const solevedQuizScheme = new Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: [true, 'userID requierd'],
-        unique: true
+        
     },
     testId: {
         type: mongoose.Schema.Types.ObjectId,
