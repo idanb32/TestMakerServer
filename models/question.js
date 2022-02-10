@@ -12,10 +12,10 @@ const questionScheme = new Scheme({
     questionTags:{
         type: Array, "default" : []
     },
-    questionAnswers:{
+    questionAnswers:[{
         type: mongoose.Schema.Types.ObjectId,
         ref : 'QuestionAnswers'
-    },
+    }],
     questionType:{
         type: String,
         enum : ['singleAnswer','multiAnswer'],

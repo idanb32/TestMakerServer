@@ -1,5 +1,5 @@
 const container = require('../containerConfig');
-const mongoose = container.resolve('mongoose');
+const mongoose =  container.resolve('mongoose');
 const Scheme  = mongoose.Schema;
 
 const subjectScheme = new Scheme({

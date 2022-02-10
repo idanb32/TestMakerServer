@@ -1,6 +1,5 @@
-
-container = requrie('../containerConfig')
-const mongoose = container.resole('mongoose')
+const container = require('../containerConfig')
+const mongoose = container.resolve('mongoose')
 const Schema = mongoose.Schema;
 
 
@@ -8,12 +7,7 @@ const solevedQuizScheme = new Schema({
 
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-<<<<<<< HEAD
-        required: [true, 'userID requierd']
-=======
-        
->>>>>>> 6185d65ea29d555add0b2053fe475123c1c6ba1d
+        ref: 'User'
     },
     testId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -33,5 +27,5 @@ const solevedQuizScheme = new Schema({
     }]
 });
 
-const solevedQuiz = mongoose.model('SolevedQuiz', quizScheme);
-model.exports = solevedQuiz;
+const solevedQuiz = mongoose.model('SolevedQuiz', solevedQuizScheme);
+module.exports = solevedQuiz;

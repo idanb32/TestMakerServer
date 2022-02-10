@@ -10,6 +10,7 @@ const userRouter  = require('./routers/UsersRouter');
 const questionRouter  = require('./routers/QuestionsRouter');
 const quizRouter  = require('./routers/QuizesRouter');
 const solvedQuestionRouter  = require('./routers/SolvedQuizesRouter');
+const modelsTest= require('./routers/models');
 
 const app = express();
 app.use(express.json());

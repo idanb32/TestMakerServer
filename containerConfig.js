@@ -3,6 +3,7 @@ const config = require('config');
 const mongoose = require('mongoose');
 const dbURl = config.get('db.url');
 
+
 const container = awilix.createContainer({injectionMode: awilix.InjectionMode.CLASSIC});
 
 mongoose.connect(dbURl, { useNewUrlParser: true, useUnifiedTopology: true })
