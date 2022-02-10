@@ -18,6 +18,7 @@ const quizScheme = new Schema({
         type: Number,
         required: [true, 'passing Grade is requierd']
     },
+<<<<<<< HEAD
     msgOnPassSubject:{
         type: String
     },
@@ -29,6 +30,19 @@ const quizScheme = new Schema({
     },
     msgOnFailBody:{
         type: String
+=======
+    msgOnPass:{
+        type: String,
+        required: [true, 'pass messege is requierd'],
+        unique: false
+
+    },
+    msgOnFail:{
+        type: String,
+        required: [true, 'fail messege is requierd'],
+        unique: false
+
+>>>>>>> 6185d65ea29d555add0b2053fe475123c1c6ba1d
     },
     questions: [{
         questionid: {

@@ -9,7 +9,11 @@ const solevedQuizScheme = new Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
+<<<<<<< HEAD
         required: [true, 'userID requierd']
+=======
+        
+>>>>>>> 6185d65ea29d555add0b2053fe475123c1c6ba1d
     },
     testId: {
         type: mongoose.Schema.Types.ObjectId,
