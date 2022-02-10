@@ -8,7 +8,7 @@ const mongose = container.resolve('mongoose');
 module.exports = class solvedQuizRep {
 
     async addSolvedQuizRep(body){
-        await this.addQuiz(body.userid, body.testId,
+        await this.addSolvedQuiz(body.userid, body.testId,
             body.score, 
             body.date, body.questions
            );

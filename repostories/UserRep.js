@@ -8,6 +8,7 @@ const mongose = container.resolve('mongoose');
 
 
 module.exports = class UserRep {
+    
 
     async addUserRep(body){
         await this.addUser(body.userName, body.userPassword,
@@ -20,7 +21,7 @@ module.exports = class UserRep {
    
 
     async updateUserFromBody(body){
-        await this.updateSolvedQuiz(body.userName, body.userPassword,
+        await this.updateUser(body._id,body.userName, body.userPassword,
             body.emailAdress, 
             body.companyID, body.userRole)
     }
@@ -36,14 +37,14 @@ module.exports = class UserRep {
     async addUser(userName,userPassword,emailAdress,companyID,userRole
     ) {
         let companyId = await this.addCompany("6205081a8f0948a7b51e215d");
-        let newSolvedQuiz = new SolvedQuiz({
+        let user = new User({
             userName : userName,
             userPassword : userPassword,
             emailAdress : emailAdress,
             companyID : companyId,
             userRole : userRole
         });
-        await newSolvedQuiz.save();
+        await user.save();
     }
 
     async addCompany(id) {
@@ -57,7 +58,7 @@ module.exports = class UserRep {
         await User.deleteOne({ _id: id });
     }
 
-    async updateUser(userName,userPassword,emailAdress,companyId,userRole
+    async updateUser(id,userName,userPassword,emailAdress,companyId,userRole
     ) {
         
         await User.updateOne({_id:id},{
@@ -69,8 +70,9 @@ module.exports = class UserRep {
         });
     }
 
-    async getUserId(id) {
+    async getUserById(id) {
         let theUser = await User.findById(id);
+        console.log(theUser.userName);
         return theUser;
     }
 
