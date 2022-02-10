@@ -8,31 +8,27 @@ const quizScheme = new Schema({
 
     language: {
         type: String,
-        required: [true, 'language is requierd'],
-        unique: true
+        required: [true, 'language is requierd']
     },
     testName:{
         type: String,
-        required: [true, 'test name is requierd'],
-        unique: true
-
+        required: [true, 'test name is requierd']
     },
     passingGrade:{
         type: Number,
-        required: [true, 'passing Grade is requierd'],
-        unique: false
+        required: [true, 'passing Grade is requierd']
     },
-    msgOnPass:{
-        type: Msg,
-        required: [true, 'language is requierd'],
-        unique: true
-
+    msgOnPassSubject:{
+        type: String
     },
-    msgOnFail:{
-        type: Object,
-        required: [true, 'language is requierd'],
-        unique: true
-
+    msgOnPassBody:{
+        type: String
+    },
+    msgOnFailSubject:{
+        type: String
+    },
+    msgOnFailBody:{
+        type: String
     },
     questions: [{
         questionid: {
@@ -42,8 +38,7 @@ const quizScheme = new Schema({
     }],
     date: {
         type: Date,
-        required: [true, 'date Of last Update requierd'],
-        unique: false,
+        required: [true, 'date Of last Update requierd']
     }
 });
 
