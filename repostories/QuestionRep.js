@@ -93,8 +93,4 @@ module.exports = class QuestionRep {
         let questions = await Question.find();
         return questions;
     }
-
-
-
-
 };
