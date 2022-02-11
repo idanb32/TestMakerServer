@@ -25,7 +25,7 @@ module.exports = class solvedQuizRep {
     }
 
     async getSolvedQuizFromBody(body){
-        let solvedQuiz =    await this.getSolvedQuizeById(body.id);
+        let solvedQuiz =  await this.getSolvedQuizeById(body.id);
         return solvedQuiz;
     }    
 
