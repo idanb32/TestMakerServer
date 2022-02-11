@@ -21,7 +21,7 @@ module.exports = class UserRep {
    
 
     async updateUserFromBody(body){
-        await this.updateUser(body._id,body.userName, body.userPassword,
+        await this.updateUser(body.id,body.userName, body.userPassword,
             body.emailAdress, 
             body.companyID, body.userRole)
     }

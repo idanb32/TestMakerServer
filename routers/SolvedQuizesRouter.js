@@ -7,7 +7,7 @@ const rep = new SolvedQuizRep();
 
 
 router.post('/Add',async (req,res)=>{
-    await rep.addSolvedQuizRep(req.body);
+    await rep.addSolvedQuizFromBody(req.body);
     res.send('SolvedQuiz has been added');
 });
 router.post('/Delete',async (req,res)=>{
@@ -15,7 +15,7 @@ router.post('/Delete',async (req,res)=>{
     res.send('SolvedQuiz has been deleted');
 });
 router.post('/Get',async (req,res)=>{
-    let solvedQuiz =   await rep.getSolvedQuizeById(req.body);
+    let solvedQuiz =   await rep.getSolvedQuizFromBody(req.body);
     res.send(solvedQuiz);
 });
 router.get('/GetAll',async (req,res)=>{
@@ -23,7 +23,7 @@ router.get('/GetAll',async (req,res)=>{
     res.send(allSolvedQuizes);
 });
 router.post('/Update',async (req,res)=>{
-    await rep.updateSolvedQuiz(req.body);
+    await rep.updateSolvedQuizFromBody(req.body);
     res.send('solvedQuiz has been updated');
 });
 
