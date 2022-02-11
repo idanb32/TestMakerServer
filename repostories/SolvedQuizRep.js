@@ -7,7 +7,7 @@ const mongose = container.resolve('mongoose');
 
 module.exports = class solvedQuizRep {
 
-    async addSolvedQuizRep(body){
+    async addSolvedQuizFromBody(body){
         await this.addSolvedQuiz(body.userid, body.testId,
             body.score, 
             body.date, body.questions
@@ -15,9 +15,9 @@ module.exports = class solvedQuizRep {
     }
 
     async updateSolvedQuizFromBody(body){
-        await this.updateSolvedQuiz(id,body.userid, body.testId,
+        await this.updateSolvedQuiz(body.id,body.userid, body.testId,
             body.score, 
-            body.date, body.questions)
+            body.dateTaken, body.userAnswer)
     }
 
     async delSolvedQuizFromBody(body){
@@ -25,7 +25,8 @@ module.exports = class solvedQuizRep {
     }
 
     async getSolvedQuizFromBody(body){
-        await this.getSolvedQuizeById(body.id);
+        let solvedQuiz =    await this.getSolvedQuizeById(body.id);
+        return solvedQuiz;
     }    
 
     async addSolvedQuiz(userId,quizId,score,date,questionArr
