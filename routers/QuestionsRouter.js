@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const questionRep = require('../repostories/QuestionRep');
-const rep = new questionRep();
+
+const container = require('../repContainer');
+const rep = container.resolve('QuestionRep');
 
 router.post('/Add',async (req,res)=>{
     await rep.addQuestionFromBody(req.body);

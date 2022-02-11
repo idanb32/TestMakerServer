@@ -31,7 +31,8 @@ module.exports = class UserRep {
     }
 
     async getUserFromBody(body){
-        await this.getUserById(body.id);
+      let user=  await this.getUserById(body.id);
+      return user;
     }    
 
     async addUser(userName,userPassword,emailAdress,companyID,userRole

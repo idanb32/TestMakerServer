@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 
-const UserRep = require('../repostories/UserRep');
-const rep = new UserRep();
+const container = require('../repContainer');
+const rep = container.resolve('UserRep');
 
 
 router.post('/Add',async (req,res)=>{

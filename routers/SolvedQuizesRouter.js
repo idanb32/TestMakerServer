@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 
-const SolvedQuizRep = require('../repostories/SolvedQuizRep');
-const rep = new SolvedQuizRep();
 
+const container = require('../repContainer');
+const rep = container.resolve('SolvedQuizRep');
 
 router.post('/Add',async (req,res)=>{
     await rep.addSolvedQuizFromBody(req.body);
