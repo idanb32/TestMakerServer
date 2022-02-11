@@ -6,11 +6,16 @@ const config = container.resolve('config');
 const PORT = config.get('DevServer.port');
 const origin  = config.get('DevServer.originAllowed');
 
+
+
 const userRouter  = require('./routers/UsersRouter');
 const questionRouter  = require('./routers/QuestionsRouter');
 const quizRouter  = require('./routers/QuizesRouter');
 const solvedQuestionRouter  = require('./routers/SolvedQuizesRouter');
 const modelsTest= require('./routers/models');
+
+const repContainer = require('./repContainer');
+
 
 const app = express();
 app.use(express.json());
