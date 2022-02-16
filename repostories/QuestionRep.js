@@ -26,7 +26,11 @@ module.exports = class QuestionRep {
       let question =   await this.getQuestionById(body.id);
       return question;
     }
-
+    async searchFromBody(body){
+        console.log(body);
+        let searchRes = await this.search(body.searchBy,body.searchText);
+        return searchRes;
+    }
     async addQuestion(questionName, questionTags,
         questionAnswers, questionType,
         horizontal, textBelow, subject) {
@@ -92,5 +96,18 @@ module.exports = class QuestionRep {
     async getAllQuestion(){
         let questions = await Question.find();
         return questions;
+    }
+
+    async search(searchBy,searchText){
+        if(searchBy == "Name"){
+            let theFoundedQuestion = await Question.find({questionName : searchText});
+            console.log("got into name " + theFoundedQuestion);
+            return theFoundedQuestion;
+        }
+        else{
+            let theFoundedQuestion = await Question.find({questionTags : searchText});
+            console.log(theFoundedQuestion);
+            return theFoundedQuestion;
+        }
     }
 };

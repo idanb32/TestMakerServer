@@ -17,12 +17,18 @@ router.post('/Get',async (req,res)=>{
     res.send(question);
 });
 router.get('/GetAll',async (req,res)=>{
+    console.log("in getall")
    let allQuestions= await rep.getAllQuestion();
     res.send(allQuestions);
 });
 router.post('/Update',async (req,res)=>{
     await rep.updateQuestionFromBody(req.body);
     res.send('question has been updated');
+});
+
+router.post('/search', async(req,res)=>{
+    let searchRes = await rep.searchFromBody(req.body);
+    res.send(searchRes);
 });
 
 

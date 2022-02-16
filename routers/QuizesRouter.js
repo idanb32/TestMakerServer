@@ -25,7 +25,10 @@ router.post('/Update',async (req,res)=>{
     res.send('Quiz has been updated');
 });
 
-
+router.post('/search', async(req,res)=>{
+    let searchRes = await rep.searchFromBody(req.body);
+    res.send(searchRes);
+});
 
 
 
