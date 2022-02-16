@@ -12,6 +12,9 @@ const userRouter  = require('./routers/UsersRouter');
 const questionRouter  = require('./routers/QuestionsRouter');
 const quizRouter  = require('./routers/QuizesRouter');
 const solvedQuestionRouter  = require('./routers/SolvedQuizesRouter');
+const subjectRouter = require('./routers/SubjectRouter')
+const companyRouter  = require('./routers/CompanyRouter');
+
 const modelsTest= require('./routers/models');
 
 const repContainer = require('./repContainer');
@@ -27,6 +30,8 @@ app.use('/user',userRouter);
 app.use('/question',questionRouter);
 app.use('/quiz',quizRouter);
 app.use('/solvedQuestion',solvedQuestionRouter);
+app.use('/company',companyRouter);
+app.use('/subject',subjectRouter);
 
 
 
