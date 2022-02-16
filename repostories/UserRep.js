@@ -47,6 +47,24 @@ module.exports = class UserRep {
         });
         await user.save();
     }
+    async getUserLogin(body){
+        let user =  await this.userLoginBody(body.userName, body.userPassword)
+        return user;
+    }
+
+    async userLoginBody(userNameBody,userPasswordBody)
+    {
+        try{
+            let theUser = await User.findOne({ userName:userNameBody,userPassword:userPasswordBody})
+            console.log(theUser);
+            return theUser;
+        }
+        catch(error)
+        {
+            console.log(error);
+            return 'Not Found';
+        }
+    }
 
     async addCompany(id) {
         const rep = new CompanyRep()

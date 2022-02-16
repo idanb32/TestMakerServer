@@ -10,6 +10,10 @@ router.post('/Add',async (req,res)=>{
     await rep.addUserRep(req.body);
     res.send('User has been added');
 });
+router.post('/GetLogin',async (req,res)=>{
+    let user =   await rep.getUserLogin(req.body);
+    res.send(user);
+});
 router.post('/Delete',async (req,res)=>{
     await rep.delUserFromBody(req.body);
     res.send('User has been deleted');
