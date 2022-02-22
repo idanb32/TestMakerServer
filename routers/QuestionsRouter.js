@@ -22,6 +22,7 @@ router.get('/GetAll',async (req,res)=>{
     res.send(allQuestions);
 });
 router.post('/Update',async (req,res)=>{
+    console.log(req.body);
     await rep.updateQuestionFromBody(req.body);
     res.send('question has been updated');
 });
