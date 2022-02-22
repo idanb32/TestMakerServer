@@ -21,6 +21,11 @@ module.exports = class QuestionRep {
             body.horizontal, body.textBelow, body.subject);
     }
 
+    async DeleteFromBody(body){
+        console.log('got to deletefrom body')
+        await this.DeleteThis(body.id);
+    }
+
     async delQuestionFromBody(body) {
         await this.deleteQuestion(body.id);
     }
@@ -166,4 +171,10 @@ module.exports = class QuestionRep {
             return theFoundedQuestion;
         }
     }
+
+    async DeleteThis(id){
+        await this.findAndDeleteAnswers(id);
+        await Question.deleteOne({_id:id});
+    }
+
 };
