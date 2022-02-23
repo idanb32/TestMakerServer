@@ -1,5 +1,6 @@
 const Quiz = require('../models/quiz');
 const Subject = require('../models/subject');
+const Question = require('../models/question');
 const container = require('../containerConfig');
 const mongose = container.resolve('mongoose');
 
@@ -94,6 +95,17 @@ module.exports = class QuizRep {
 
     async getQuizeById(id) {
         let theQuiz = await Quiz.findById(id);
+        return theQuiz;
+    }
+
+    async getQuizWithQustion(id){
+        let theQuiz = await Quiz.findById(id);
+        let tmp =[];
+        for (let questionId of theQuiz.questions){
+            let question = await Question.findById(questionId);
+            tmp.push(question);
+        }
+        theQuiz.questions = tmp;
         return theQuiz;
     }
 

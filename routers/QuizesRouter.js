@@ -30,6 +30,11 @@ router.post('/search', async(req,res)=>{
     res.send(searchRes);
 });
 
+router.post('/getWithQuestion',async (req,res)=>{
+    let quiz = await rep.getQuizWithQustion(req.body.id);
+    res.send(quiz);
+});
+
 
 
 module.exports = router;

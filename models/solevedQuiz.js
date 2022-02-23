@@ -23,7 +23,7 @@ const solevedQuizScheme = new Schema({
     },
     userAnswer: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Question'
+        ref: 'QuestionAnswers'
     }]
 });
 
