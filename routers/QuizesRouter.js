@@ -29,6 +29,10 @@ router.post('/search', async(req,res)=>{
     let searchRes = await rep.searchFromBody(req.body);
     res.send(searchRes);
 });
+router.post('/searchBySubject', async(req,res)=>{
+    let searchRes = await rep.searchBySubjectFromBody(req.body);
+    res.send(searchRes);
+});
 
 router.post('/getWithQuestion',async (req,res)=>{
     console.log(`got to get with question`)

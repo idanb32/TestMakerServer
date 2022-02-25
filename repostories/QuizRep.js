@@ -34,6 +34,10 @@ module.exports = class QuizRep {
       return  await this.getQuizeById(body.id);
     }
 
+    async searchBySubjectFromBody(body) {
+        let result = await this.searchBySubjcet(body.subjectId)
+        return result;
+    }
     async searchFromBody(body) {
         let result = await this.search(body.searchText, body.searchBy)
         return result;
@@ -119,6 +123,11 @@ module.exports = class QuizRep {
 
     async getAllQuizes() {
         let Quizes = await Quiz.find();
+        return Quizes;
+    }
+    async searchBySubjcet(subjectId){
+
+        let Quizes = await Quiz.find({subjectOfStudying:subjectId});
         return Quizes;
     }
 
