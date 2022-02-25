@@ -146,11 +146,15 @@ module.exports = class QuestionRep {
     async findOrCreateSubject(subject) {
         try {
             let foundSubject = await Subject.find({ subjectName: subject })
+            if(foundSubject.length ==0){
+                let newSub = await this.addSubject(subject);
+                return newSub._id;
+            }
             return foundSubject._id;
+
         }
         catch (err) {
-            let newSub = await this.addSubject(subject);
-            return newSub._id;
+          console.log(err);
         }
     }
 
