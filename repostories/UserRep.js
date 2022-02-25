@@ -11,10 +11,11 @@ module.exports = class UserRep {
     
 
     async addUserRep(body){
-        await this.addUser(body.userName, body.userPassword,
+      let user =   await this.addUser(body.userName, body.userPassword,
             body.emailAdress, 
             body.companyID, body.userRole
            );
+        return user;
            
     }
 
@@ -46,6 +47,7 @@ module.exports = class UserRep {
             userRole : userRole
         });
         await user.save();
+        return user;
     }
     async getUserLogin(body){
         let user =  await this.userLoginBody(body.userName, body.userPassword)

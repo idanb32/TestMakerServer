@@ -31,7 +31,7 @@ module.exports = class QuizRep {
     }
 
     async getQuizFromBody(body) {
-      return  await this.getQuizeById(body.id);
+        return await this.getQuizeById(body.id);
     }
 
     async searchBySubjectFromBody(body) {
@@ -49,7 +49,7 @@ module.exports = class QuizRep {
         msgOnFailBody, questions,
         date, subjectOfStudying
     ) {
-        let subId = await this.addSubject(subjectOfStudying);
+        let subId = await this.findOrAddSubject(subjectOfStudying);
         let newQuiz = new Quiz({
             language: language,
             testName: testName,
@@ -63,6 +63,21 @@ module.exports = class QuizRep {
             subjectOfStudying: subId
         });
         await newQuiz.save();
+    }
+
+    async findOrAddSubject(subject) {
+        try {
+            let foundSubject = await Subject.find({ subjectName: subject });
+            console.log(foundSubject);
+            if (foundSubject.length==0) {
+                let newSub = await this.addSubject(subject);
+                return newSub._id;
+            }
+            return foundSubject._id;
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 
     async addSubject(subject) {
@@ -104,13 +119,13 @@ module.exports = class QuizRep {
         return theQuiz;
     }
 
-    async getQuizWithQustion(id){
+    async getQuizWithQustion(id) {
         let theQuiz = await Quiz.findById(id);
-        let tmp =[];
-        for (let questionId of theQuiz.questions){
+        let tmp = [];
+        for (let questionId of theQuiz.questions) {
             let question = await Question.findById(questionId);
-            let tmp2 =[];
-            for (let answerId of question.questionAnswers){
+            let tmp2 = [];
+            for (let answerId of question.questionAnswers) {
                 let answer = await QuestionAnswers.findById(answerId);
                 tmp2.push(answer);
             }
@@ -136,7 +151,7 @@ module.exports = class QuizRep {
             let result = await Quiz.find({ testName: text });
             return result
         }
-        else{
+        else {
             let result = await Quiz.find({ language: text });
             return result
         }

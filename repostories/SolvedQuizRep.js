@@ -4,6 +4,7 @@ const container = require('../containerConfig');
 const mongose = container.resolve('mongoose');
 const QuestionAnswer = require('../models/questionAnswers');
 const Question = require('../models/question');
+const res = require('express/lib/response');
 
 module.exports = class solvedQuizRep {
 
@@ -26,6 +27,11 @@ module.exports = class solvedQuizRep {
     }
     async delSolvedQuizFromBody(body) {
         await this.deleteSolvedQuiz(body.id);
+    }
+
+    async getSolvedQuizOfQuizByBody(body){
+        let res = await this.getSolvedQuizOfQuiz(body.id);
+        return res;
     }
 
     async getSolvedQuizFromBody(body) {
@@ -151,5 +157,11 @@ module.exports = class solvedQuizRep {
         }
         let returnMe = parseFloat(scoreForThisQuestion / correctAnswersOfQuestion);
         return returnMe;
+    }
+
+    async getSolvedQuizOfQuiz(id){
+        let result = await SolvedQuiz.find({testId:id});
+        return result
+
     }
 }

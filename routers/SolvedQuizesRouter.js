@@ -32,5 +32,10 @@ router.post('/Submit', async (req, res) => {
     res.send(`${score}`);
 });
 
+router.post('/GetSolvedOfQuiz', async (req,res)=>{
+    let solvedQuizes = await rep.getSolvedQuizOfQuizByBody(req.body);
+    res.send(solvedQuizes);
+});
+
 
 module.exports = router;
