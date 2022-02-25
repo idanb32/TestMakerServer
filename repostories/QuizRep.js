@@ -18,6 +18,7 @@ module.exports = class QuizRep {
     }
 
     async updateQuizFromBody(body) {
+        console.log(body);
         await this.updateQuiz(body.id, body.language, body.testName,
             body.passingGrade, body.msgOnPassSubject,
             body.msgOnPassBody, body.msgOnFailSubject,
@@ -30,7 +31,7 @@ module.exports = class QuizRep {
     }
 
     async getQuizFromBody(body) {
-        await this.getQuizeById(body.id);
+      return  await this.getQuizeById(body.id);
     }
 
     async searchFromBody(body) {
