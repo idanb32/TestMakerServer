@@ -31,6 +31,7 @@ router.post('/search', async(req,res)=>{
 });
 
 router.post('/getWithQuestion',async (req,res)=>{
+    console.log(`got to get with question`)
     let quiz = await rep.getQuizWithQustion(req.body.id);
     res.send(quiz);
 });

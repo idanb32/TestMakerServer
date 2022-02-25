@@ -2,6 +2,7 @@ const Quiz = require('../models/quiz');
 const Subject = require('../models/subject');
 const Question = require('../models/question');
 const container = require('../containerConfig');
+const QuestionAnswers = require('../models/questionAnswers');
 const mongose = container.resolve('mongoose');
 
 
@@ -103,6 +104,12 @@ module.exports = class QuizRep {
         let tmp =[];
         for (let questionId of theQuiz.questions){
             let question = await Question.findById(questionId);
+            let tmp2 =[];
+            for (let answerId of question.questionAnswers){
+                let answer = await QuestionAnswers.findById(answerId);
+                tmp2.push(answer);
+            }
+            question.questionAnswers = tmp2;
             tmp.push(question);
         }
         theQuiz.questions = tmp;
