@@ -49,7 +49,7 @@ module.exports = class QuizRep {
         msgOnFailBody, questions,
         date, subjectOfStudying
     ) {
-        let subId = await this.findOrAddSubject(subjectOfStudying);
+        //let subId = await this.findOrAddSubject(subjectOfStudying);
         let newQuiz = new Quiz({
             language: language,
             testName: testName,
@@ -60,7 +60,7 @@ module.exports = class QuizRep {
             msgOnFailBody: msgOnFailBody,
             questions: questions,
             date: date,
-            subjectOfStudying: subId
+            subjectOfStudying: subjectOfStudying
         });
         await newQuiz.save();
     }
@@ -90,7 +90,8 @@ module.exports = class QuizRep {
     }
 
     async deleteQuiz(id) {
-        await Question.deleteOne({ _id: id });
+        console.log('in del removing '+ id)
+        await Quiz.deleteOne({ _id: id });
     }
 
     async updateQuiz(id, language, testName,
@@ -143,8 +144,11 @@ module.exports = class QuizRep {
     async searchBySubjcet(subjectId){
 
         let Quizes = await Quiz.find({subjectOfStudying:subjectId});
+        console.log(Quizes);
         return Quizes;
     }
+    
+    
 
     async search(text, searchBy) {
         if (searchBy == "Name") {

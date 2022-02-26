@@ -31,6 +31,11 @@ router.post('/Update',async (req,res)=>{
     await rep.updateSubjectFromBody(req.body);
     res.send('Subject has been updated');
 });
+router.post('/GetSubjectByName',async (req,res)=>{
+    let subject =await rep.getSubjectNameBody(req.body);
+    res.send(subject);
+});
+
 
 
 module.exports = router;

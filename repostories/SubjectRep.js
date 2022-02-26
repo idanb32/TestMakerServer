@@ -12,6 +12,9 @@ module.exports = class SubjectRep {
        let result =  await this.getSubWithCompany(body.companyID)
         return result;
     }
+    async getSubjectNameBody(body){
+       return await this.getSubjectByName(body.subjectName)
+    }
 
     async addSubject(subjectNameInput)
     {
@@ -56,6 +59,14 @@ module.exports = class SubjectRep {
     {
         let subjectWCompany = await Subject.find({companyId:companyID})
         return subjectWCompany;
+    }
+
+    async getSubjectByName(subjectNameInput)
+    {
+
+        let subject = await Subject.find({subjectName:subjectNameInput})
+        console.log(subject);
+        return subject;
     }
 
     async getAllSubject(){
