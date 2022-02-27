@@ -65,7 +65,7 @@ module.exports = class QuizRep {
         try {
             let foundSubject = await Subject.find({ subjectName: subject });
             console.log(foundSubject);
-            if (foundSubject.length==0) {
+            if (foundSubject.length == 0) {
                 let newSub = await this.addSubject(subject);
                 return newSub._id;
             }
@@ -147,4 +147,18 @@ module.exports = class QuizRep {
             return result
         }
     }
+
+    async GetQuizQuestion(id) {
+        let theQuiz = await Quiz.findById(id);
+        let tmp = [];
+        for (let questionId of theQuiz.questions) {
+            let question = await Question.findById(questionId);
+            if(question)
+            let tmp2 = { id: question._id, questionName: question.questionName }
+            tmp.push(tmp2);
+        }
+        return tmp;
+    }
+
+
 }
