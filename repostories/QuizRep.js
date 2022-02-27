@@ -148,6 +148,19 @@ module.exports = class QuizRep {
         return Quizes;
     }
 
+    async getQuizesWithSubject(subject){
+        let subId = await Subject.find({ subjectName: subject })
+        console.log(subId[0]._id);
+        console.log(subject);
+        if (subId.length != 0) {
+            let res = await Quiz.find({ subjectOfStudying: subId[0]._id });
+             console.log(res);
+            return res;
+        }
+        let res = await Quiz.find({ subjectOfStudying: subId });
+        // console.log(res);
+        return res;
+    }
 
 
     async search(text, searchBy) {
