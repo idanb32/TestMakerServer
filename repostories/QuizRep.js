@@ -90,7 +90,7 @@ module.exports = class QuizRep {
     }
 
     async deleteQuiz(id) {
-        console.log('in del removing '+ id)
+        console.log('in del removing ' + id)
         await Quiz.deleteOne({ _id: id });
     }
 
@@ -141,14 +141,14 @@ module.exports = class QuizRep {
         let Quizes = await Quiz.find();
         return Quizes;
     }
-    async searchBySubjcet(subjectId){
+    async searchBySubjcet(subjectId) {
 
-        let Quizes = await Quiz.find({subjectOfStudying:subjectId});
+        let Quizes = await Quiz.find({ subjectOfStudying: subjectId });
         console.log(Quizes);
         return Quizes;
     }
-    
-    
+
+
 
     async search(text, searchBy) {
         if (searchBy == "Name") {
@@ -166,12 +166,15 @@ module.exports = class QuizRep {
         let tmp = [];
         for (let questionId of theQuiz.questions) {
             let question = await Question.findById(questionId);
-            if(question)
-            let tmp2 = { id: question._id, questionName: question.questionName }
-            tmp.push(tmp2);
+            if (question) {
+                let tmp2 = {
+                    id: question._id,
+                    questionName: question.questionName
+                };
+                tmp.push(tmp2);
+            }
         }
         return tmp;
     }
-
 
 }
