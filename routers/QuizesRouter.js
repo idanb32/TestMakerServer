@@ -41,11 +41,12 @@ router.post('/getWithQuestion', async (req, res) => {
 });
 
 router.post('/GetQuizQuestion', async (req, res) => {
+    console.log(`got to get quiz question`);
     let questions = await rep.GetQuizQuestion(req.body.id);
     res.send(questions);
 })
 router.post('/getallSubject', async (req, res) => {
-    
+
     let questions = await rep.getQuizesWithSubject(req.body.subject);
     res.send(questions);
 });

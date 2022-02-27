@@ -27,7 +27,6 @@ module.exports = class QuestionRep {
     }
 
     async DeleteFromBody(body) {
-        console.log('got to deletefrom body')
         await this.DeleteThis(body.id);
     }
 
@@ -41,7 +40,6 @@ module.exports = class QuestionRep {
     }
 
     async searchFromBody(body) {
-        console.log(body);
         let searchRes = await this.search(body.searchBy, body.searchText);
         return searchRes;
     }
@@ -130,7 +128,6 @@ module.exports = class QuestionRep {
         questionAnswers, newQuestionType,
         newHorizontal, newTextBelow, subId) {
         await this.findAndDeleteAnswers(questionId);
-        console.log(`passed the delete`);
         let questionAnswersArr = await this.addQuestionAnswers(questionAnswers, questionId);
         let subjectId = await this.findOrCreateSubject(subId);
         await Question.updateOne({ _id: questionId }, {
@@ -151,6 +148,7 @@ module.exports = class QuestionRep {
     async findOrCreateSubject(subject) {
         try {
             let foundSubject = await Subject.find({ subjectName: subject })
+            console.log(foundSubject);
             if (foundSubject.length == 0) {
                 let newSub = await this.addSubject(subject);
                 return newSub._id;
@@ -171,12 +169,10 @@ module.exports = class QuestionRep {
     async search(searchBy, searchText) {
         if (searchBy == "Name") {
             let theFoundedQuestion = await Question.find({ questionName: searchText });
-            console.log("got into name " + theFoundedQuestion);
             return theFoundedQuestion;
         }
         else {
             let theFoundedQuestion = await Question.find({ questionTags: searchText });
-            console.log(theFoundedQuestion);
             return theFoundedQuestion;
         }
     }
@@ -192,7 +188,6 @@ module.exports = class QuestionRep {
             let res = await Question.find({ subject: subId[0]._id });
         }
         let res = await Question.find({ subject: subId });
-        console.log(res);
         return res;
     }
 

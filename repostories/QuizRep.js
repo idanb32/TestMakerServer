@@ -18,7 +18,6 @@ module.exports = class QuizRep {
     }
 
     async updateQuizFromBody(body) {
-        console.log(body);
         await this.updateQuiz(body.id, body.language, body.testName,
             body.passingGrade, body.msgOnPassSubject,
             body.msgOnPassBody, body.msgOnFailSubject,
@@ -68,7 +67,6 @@ module.exports = class QuizRep {
     async findOrAddSubject(subject) {
         try {
             let foundSubject = await Subject.find({ subjectName: subject });
-            console.log(foundSubject);
             if (foundSubject.length == 0) {
                 let newSub = await this.addSubject(subject);
                 return newSub._id;
@@ -90,7 +88,6 @@ module.exports = class QuizRep {
     }
 
     async deleteQuiz(id) {
-        console.log('in del removing ' + id)
         await Quiz.deleteOne({ _id: id });
     }
 
@@ -122,6 +119,7 @@ module.exports = class QuizRep {
 
     async getQuizWithQustion(id) {
         let theQuiz = await Quiz.findById(id);
+
         let tmp = [];
         for (let questionId of theQuiz.questions) {
             let question = await Question.findById(questionId);
@@ -144,21 +142,17 @@ module.exports = class QuizRep {
     async searchBySubjcet(subjectId) {
 
         let Quizes = await Quiz.find({ subjectOfStudying: subjectId });
-        console.log(Quizes);
         return Quizes;
     }
 
     async getQuizesWithSubject(subject){
         let subId = await Subject.find({ subjectName: subject })
-        console.log(subId[0]._id);
-        console.log(subject);
         if (subId.length != 0) {
             let res = await Quiz.find({ subjectOfStudying: subId[0]._id });
              console.log(res);
             return res;
         }
         let res = await Quiz.find({ subjectOfStudying: subId });
-        // console.log(res);
         return res;
     }
 
@@ -179,6 +173,7 @@ module.exports = class QuizRep {
         let tmp = [];
         for (let questionId of theQuiz.questions) {
             let question = await Question.findById(questionId);
+            console.log(question)
             if (question) {
                 let tmp2 = {
                     id: question._id,

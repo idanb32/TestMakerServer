@@ -34,7 +34,6 @@ app.use('/company',companyRouter);
 app.use('/subject',subjectRouter);
 
 
-
 app.listen(PORT, ()=>{
     console.log(`server is running on PORT : ${PORT}`);
 });
