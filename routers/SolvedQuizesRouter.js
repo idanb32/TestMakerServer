@@ -22,6 +22,10 @@ router.get('/GetAll', async (req, res) => {
     let allSolvedQuizes = await rep.getAllSolvedQuizes();
     res.send(allSolvedQuizes);
 });
+router.post('/GetAllWithUserName', async (req, res) => {
+    let allSolvedQuizes = await rep.getAllSolvedQuizesWithUserNameFromBody(req.body);
+    res.send(allSolvedQuizes);
+});
 router.post('/Update', async (req, res) => {
     await rep.updateSolvedQuizFromBody(req.body);
     res.send('solvedQuiz has been updated');

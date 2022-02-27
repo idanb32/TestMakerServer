@@ -17,7 +17,6 @@ router.post('/Get', async (req, res) => {
     res.send(question);
 });
 router.get('/GetAll', async (req, res) => {
-    console.log("in getall")
     let allQuestions = await rep.getAllQuestion();
     res.send(allQuestions);
 });
@@ -37,6 +36,11 @@ router.post('/Delete', async (req, res) => {
     res.send('Question was deleted');
 });
 
+router.post('/getallSubject',async(req,res)=>{
+    console.log(`in get all subjects`)
+    let allQuestions = await rep.getAllQuestionWithSubjectFromBody(req.body);
+    res.send(allQuestions);
+});
 
 
 module.exports = router;

@@ -36,6 +36,10 @@ router.post('/getWithQuestion',async (req,res)=>{
     res.send(quiz);
 });
 
+router.post('/GetQuizQuestion',async (req,res)=>{
+    let questions = await rep.GetQuizQuestion(req.body.id);
+    res.send(questions);
+})
 
 
 module.exports = router;

@@ -21,7 +21,12 @@ module.exports = class QuestionRep {
             body.horizontal, body.textBelow, body.subject);
     }
 
-    async DeleteFromBody(body){
+    async getAllQuestionWithSubjectFromBody(body) {
+        let res = await this.getAllQuestionWithSubject(body.subject);
+        return res;
+    }
+
+    async DeleteFromBody(body) {
         console.log('got to deletefrom body')
         await this.DeleteThis(body.id);
     }
@@ -139,22 +144,22 @@ module.exports = class QuestionRep {
         });
     }
 
-    async findAndDeleteAnswers(questionId){
-        await QuestionAnswers.deleteMany({question:questionId});
+    async findAndDeleteAnswers(questionId) {
+        await QuestionAnswers.deleteMany({ question: questionId });
     }
 
     async findOrCreateSubject(subject) {
         try {
             let foundSubject = await Subject.find({ subjectName: subject })
-            if(foundSubject.length ==0){
+            if (foundSubject.length == 0) {
                 let newSub = await this.addSubject(subject);
                 return newSub._id;
             }
-            return foundSubject._id;
+            return foundSubject[0]._id;
 
         }
         catch (err) {
-          console.log(err);
+            console.log(err);
         }
     }
 
@@ -176,9 +181,19 @@ module.exports = class QuestionRep {
         }
     }
 
-    async DeleteThis(id){
+    async DeleteThis(id) {
         await this.findAndDeleteAnswers(id);
-        await Question.deleteOne({_id:id});
+        await Question.deleteOne({ _id: id });
+    }
+
+    async getAllQuestionWithSubject(subject) {
+        let subId = await Subject.find({ subjectName: subject })
+        if (subId.length != 0) {
+            let res = await Question.find({ subject: subId[0]._id });
+        }
+        let res = await Question.find({ subject: subId });
+        console.log(res);
+        return res;
     }
 
 };

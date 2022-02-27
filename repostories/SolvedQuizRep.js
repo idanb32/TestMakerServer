@@ -4,6 +4,7 @@ const container = require('../containerConfig');
 const mongose = container.resolve('mongoose');
 const QuestionAnswer = require('../models/questionAnswers');
 const Question = require('../models/question');
+const User = require('../models/user');
 const res = require('express/lib/response');
 
 module.exports = class solvedQuizRep {
@@ -28,8 +29,12 @@ module.exports = class solvedQuizRep {
     async delSolvedQuizFromBody(body) {
         await this.deleteSolvedQuiz(body.id);
     }
+    async getAllSolvedQuizesWithUserNameFromBody(body) {
+        let res = await this.getAllSolvedQuizesWithUserName(body.id, body.from, body.to)
+        return res;
+    }
 
-    async getSolvedQuizOfQuizByBody(body){
+    async getSolvedQuizOfQuizByBody(body) {
         let res = await this.getSolvedQuizOfQuiz(body.id);
         return res;
     }
@@ -106,6 +111,42 @@ module.exports = class solvedQuizRep {
         let SolvedQuizes = await SolvedQuiz.find();
         return SolvedQuizes;
     }
+    async getAllSolvedQuizesWithUserName(id, from, to) {
+        let SolvedQuizes = await this.getSolvedQuizOfQuiz(id);
+        if (from == null) {
+            let solvedWithUserName = await Promise.all(SolvedQuizes.map(async (item) => {
+                let user = await User.findById(item.userId);
+                let newItem = {
+                    _id: item._id,
+                    userName: user.userName,
+                    testId: item.testId,
+                    score: item.score,
+                    dateTaken: item.dateTaken,
+                    userAnswer: item.userAnswer
+                }
+                return newItem;
+            }));
+            return solvedWithUserName;
+        }
+        else {
+            let solvedWithUserName = await Promise.all(SolvedQuizes.map(async (item) => {
+                let newFrom =  new Date(from);
+                let newTo =  new Date(to);
+                let user = await User.findById(item.userId);
+                let newItem = {
+                    _id: item._id,
+                    userName: user.userName,
+                    testId: item.testId,
+                    score: item.score,
+                    dateTaken: item.dateTaken,
+                    userAnswer: item.userAnswer
+                }
+                if (item.dateTaken >= newFrom && item.dateTaken <= newTo)
+                    return newItem;
+            }));
+            return solvedWithUserName;
+        }
+    }
 
     async getAnswers(answerArr) {
         let tmp = [];
@@ -159,8 +200,8 @@ module.exports = class solvedQuizRep {
         return returnMe;
     }
 
-    async getSolvedQuizOfQuiz(id){
-        let result = await SolvedQuiz.find({testId:id});
+    async getSolvedQuizOfQuiz(id) {
+        let result = await SolvedQuiz.find({ testId: id });
         return result
 
     }
