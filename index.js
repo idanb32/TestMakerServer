@@ -15,7 +15,6 @@ const solvedQuestionRouter  = require('./routers/SolvedQuizesRouter');
 const subjectRouter = require('./routers/SubjectRouter')
 const companyRouter  = require('./routers/CompanyRouter');
 
-const modelsTest= require('./routers/models');
 
 const repContainer = require('./repContainer');
 
